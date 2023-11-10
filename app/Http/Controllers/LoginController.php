@@ -3,14 +3,16 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Session;
 
 class LoginController extends Controller
 {
     public function login()
     {
-        if(Auth::check()){
+        if (Auth::check()) {
             return redirect('home');
-        }else{
+        } else {
             return view('login');
         }
     }
@@ -19,20 +21,20 @@ class LoginController extends Controller
     {
         $data = [
             'email' => $request->input('email'),
-            'password' => $request->input('password'),
+            'password'=> $request->input('password'),
         ];
 
-        if(Auth::attempt(data)){
+        if (Auth::attempt($data)) {
             $user = Auth::user();
 
-            if($user->active){
+            if ($user->active) {
                 return redirect('home');
-            }else{
+            } else {
                 Auth::logout();
-                Session::flash('erorr', 'Akun Anda belum diverifikasi. Silahkan cek email Anda.');
+                Session::flash('error', 'Akun Anda belum diverifikasi. Silakan cek email Anda.');
                 return redirect('/');
             }
-        }else{
+        } else {
             Session::flash('error', 'Email atau password salah');
             return redirect('/');
         }
