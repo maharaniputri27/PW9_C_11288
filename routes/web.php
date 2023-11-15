@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\BukuController;
 use App\Http\Controllers\HomeController;
 
 Route::get('/', [LoginController::class,'login'])->name('login');
@@ -14,3 +15,5 @@ Route::get('register/verify/{verify_key}', [RegisterController::class,'verify'])
 
 Route::get('logout', [LoginController::class,'actionLogout'])->name('actionLogout')->middleware('auth');
 Route::get('home', [HomeController::class,'index'])->name('home')->middleware('auth');
+
+Route::resource('buku', BukuController::class)->middleware('auth');

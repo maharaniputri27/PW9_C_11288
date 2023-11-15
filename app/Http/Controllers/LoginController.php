@@ -28,7 +28,7 @@ class LoginController extends Controller
             $user = Auth::user();
 
             if ($user->active) {
-                return redirect('home');
+                return view('home');
             } else {
                 Auth::logout();
                 Session::flash('error', 'Akun Anda belum diverifikasi. Silakan cek email Anda.');
