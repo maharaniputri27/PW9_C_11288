@@ -16,12 +16,8 @@ date_default_timezone_set('Asia/Jakarta');
     <style>
         .dropdown-menu {
             background: rgba(255, 255, 255, 0.8);
-            /* Mengatur latar 
-                belakang transparan */
             border: 1px solid #ccc;
-            /* Garis tepi */
             border-radius: 10px;
-            /* Sudut membulat */
             padding: 15px;
         }
 
@@ -46,7 +42,7 @@ date_default_timezone_set('Asia/Jakarta');
             width: 80%;
             margin-left: 150px;
             background: rgba(255, 255, 255, 0.8);
-            margin-top: 20px;
+            margin-top: 30px;
         }
 
         body {
@@ -55,7 +51,7 @@ date_default_timezone_set('Asia/Jakarta');
             background-position: center;
         }
 
-        .from-row {
+         .from-row {
             text-align: center;
             margin-bottom: 20px; 
             margin-top: 30px;
@@ -76,11 +72,11 @@ date_default_timezone_set('Asia/Jakarta');
                 <li class="nav-item ">
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item active">
+                <li class="nav-item ">
                     <a class="nav-link" href="{{route('buku.index')}}">Buku Saya</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{route('pinjam')}}">Pinjam</a>
+                    <a class="nav-link active" href="{{route('pinjam')}}">Pinjam</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="{{route('kembalikan')}}">Kembalikan</a>
@@ -120,12 +116,11 @@ date_default_timezone_set('Asia/Jakarta');
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                  <div class="from-row">
-                     <button type="button" class="btn btn-primary btn-lg" style="background-color: #00A86B; color: black; border: none;">Tambah Buku Saya</button>
+                     <div class="from-row">
+                     <button type="button" class="btn btn-primary btn-lg" style="background-color: #00A86B; color: black; border: none;">Pinjam Buku</button>
                     </div>
-                <div class="card">
+                    <div class="card">
                         <div class="card-body">
-                            <a href="{{ route('buku.create') }}" class="btn btn-md btn-success mb-3">TAMBAH BUKU</a>
                             <div class="table-responsive p-0">
                                 <table class="table table-hover text-nowrap">
                                     <thead>
@@ -133,23 +128,20 @@ date_default_timezone_set('Asia/Jakarta');
                                             <th class="text-center">No</th>
                                             <th class="text-center">Judul Buku</th>
                                             <th class="text-center">Penulis</th>
-                                            <th class="text-center">Status Buku</th>
+                                            <th class="text-center">Penerbit</th>
                                             <th class="text-center">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @forelse ($buku as $index => $item)
+                                        @forelse ($pinjaman as $item)
                                         <tr>
-                                            <td class="text-center">{{ $index + 1 }}</td>
+                                            <td class="text-center">{{ $item->no }}</td>
                                             <td class="text-center">{{ $item->judul }}</td>
-                                            <td class="text-center">{{ $item->penulis }}</td>
+                                            <td class="text-center">{{ $item->user->username }}</td>
                                             <td class="text-center">{{ $item->status }}</td>
                                             <td class="text-center">
-                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('buku.destroy', ['buku' => $item->id_buku]) }}" method="POST">
-                                                    <a href="{{ route('buku.edit', ['buku' => $item->id_buku]) }}" class="text-primary"><i class="fa fa-pencil"></i></a>
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <button type="submit" class="text-danger" style="border: none; background-color:transparent;"><i class="fa fa-trash"></i>
+                                                <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('pinjam.update', ['id_buku' => $item->id_buku]) }}">
+                                                    <button type="submit" class="text-primary" style="border: none; background-color:transparent;"><i class="fa fa-plus"></i>
                                                     </button>
                                                 </form>
                                             </td>
@@ -166,7 +158,7 @@ date_default_timezone_set('Asia/Jakarta');
                                     </tbody>
                                 </table>
                             </div>
-                            {{ $buku->links() }}
+                            {{ $pinjaman->links() }}
                         </div>
                     </div>
                 </div>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
 use App\Models\User;
 use App\Mail\MailSend;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class RegisterController extends Controller
 {
@@ -24,7 +24,7 @@ class RegisterController extends Controller
             'email' => $request->email,
             'username' => $request->username,
             'password' => Hash::make($request->password),
-            'verify_key'=> $str,
+            'verify_key' => $str,
         ]);
 
         $details = [
@@ -36,7 +36,7 @@ class RegisterController extends Controller
 
         Mail::to($request->email)->send(new MailSend($details));
 
-        Session::flash('message','Link verifikasi telah dikirim ke email anda. Silahkan cek email anda untuk mengaktifkan akun.');
+        Session::flash('message', 'Link verifikasi telah dikirim ke email anda. Silahkan cek email anda untuk mengaktifkan akun.');
         return redirect('register');
     }
 

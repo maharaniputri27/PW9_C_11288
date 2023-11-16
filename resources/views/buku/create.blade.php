@@ -42,18 +42,29 @@ date_default_timezone_set('Asia/Jakarta');
             color: black;
         }
 
-        .card{
+        .card {
             width: 80%;
-            margin-left:150px;
+            margin-left: 150px;
             background: rgba(255, 255, 255, 0.8);
-            margin-top: 50px;
+            min-height: 100vh; 
+   
         }
 
-        body{
-             background: url('https://wallpapers.com/images/high/zigzag-river-aesthetic-landscape-zrf9jzxpxx736bd0.webp');
-                background-size: cover;
-                background-position: center;
+        body {
+            background: url('https://wallpapers.com/images/high/zigzag-river-aesthetic-landscape-zrf9jzxpxx736bd0.webp');
+            background-size: cover;
+            background-position: center;
         }
+
+        .from-row {
+            text-align: center;
+            margin-bottom: 20px; 
+        }
+
+
+        
+
+        
     </style>
 </head>
 
@@ -74,10 +85,10 @@ date_default_timezone_set('Asia/Jakarta');
                     <a class="nav-link" href="#">Buku Saya</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pinjam</a>
+                    <a class="nav-link" href="{{route('pinjam')}}">Pinjam</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Kembalikan</a>
+                    <a class="nav-link" href="{{route('kembalikan')}}">Kembalikan</a>
                 </li>
             </ul>
 
@@ -95,8 +106,9 @@ date_default_timezone_set('Asia/Jakarta');
                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                         <div class="text-center">
                             <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" class="rounded-circle mb-3" style="width: 100px;" alt="Avatar" />
-                            
-                         
+
+       
+
                         </div>
 
                         <div class="dropdown-divider"></div>
@@ -110,22 +122,28 @@ date_default_timezone_set('Asia/Jakarta');
         </div>
     </nav>
 
-     <div class="content">
+    <div class="content">
         <div class="container-fluid">
             <div class="row">
                 <div class="col-12">
-                    <div class="card">
+                    
+                <div class="card">
                         <div class="card-body">
                             <form action="{{ route('buku.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
+                                    <div class="from-row">
+                                        <button type="button" class="btn btn-primary btn-lg" style="background-color: #00A86B; color: black; border: none;">Tambah Buku Saya</button>
+                                    </div>
+
+
                                 <div class="form-row">
-                                    <div class="form-group col-md-12">
+                                    <div class="form-group col-md-6">
                                         <label class="font-weight-bold">Judul Buku</label>
                                         <input type="text" class="form-control @error('judul') is-invalid @enderror" name="judul" value="{{ old('judul') }}" placeholder="Masukkan Judul Buku">
                                         @error('judul')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
                                 </div>
@@ -134,15 +152,15 @@ date_default_timezone_set('Asia/Jakarta');
                                         <label class="font-weight-bold">Penulis</label>
                                         <input type="text" class="form-control @error('penulis') is-invalid @enderror" name="penulis" value="{{ old('penulis') }}" placeholder="Masukkan Penulis">
                                         @error('penulis')
-                                            <div class="invalid-feedback">
-                                                {{ $message }}
-                                            </div>
+                                        <div class="invalid-feedback">
+                                            {{ $message }}
+                                        </div>
                                         @enderror
                                     </div>
-                                   
+                                </div>
                                 <button type="submit" class="btn btn-md btn-primary">SIMPAN</button>
                             </form>
-                           
+
                         </div>
                     </div>
                 </div>
