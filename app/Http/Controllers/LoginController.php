@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Session;
+use Illuminate\Support\Facades\Session;
 
 class LoginController extends Controller
 {
@@ -21,7 +21,7 @@ class LoginController extends Controller
     {
         $data = [
             'email' => $request->input('email'),
-            'password'=> $request->input('password'),
+            'password' => $request->input('password'),
         ];
 
         if (Auth::attempt($data)) {

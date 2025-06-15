@@ -16,12 +16,11 @@ date_default_timezone_set('Asia/Jakarta');
     <style>
         .dropdown-menu {
             background: rgba(255, 255, 255, 0.8);
-            /* Mengatur latar 
-                belakang transparan */
+         
             border: 1px solid #ccc;
-            /* Garis tepi */
+      
             border-radius: 10px;
-            /* Sudut membulat */
+        
             padding: 15px;
         }
 
@@ -58,14 +57,14 @@ date_default_timezone_set('Asia/Jakarta');
                     <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="buku">Buku Saya</a>
+                    <a class="nav-link" href="/buku">Buku Saya</a>
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Pinjam</a>
+                    <a class="nav-link" href="{{route('pinjam')}}">Pinjam</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Kembalikan</a>
+                    <a class="nav-link" href="{{route('kembalikan')}}">Kembalikan</a>
                 </li>
             </ul>
 
@@ -138,17 +137,16 @@ date_default_timezone_set('Asia/Jakarta');
         </a>
     </div>
 
-    <!-- jQuery library -->
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-    <!-- Popper JS -->
+
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <!-- Latest compiled JavaScript -->
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
         window.onload = function() {
-            // Menghapus riwayat perambanan
-            window.history.pushState({}, '', '/'); // Mengganti URL ke halaman login
+           
+            window.history.pushState({}, '', '/'); 
         }
     </script>
 
