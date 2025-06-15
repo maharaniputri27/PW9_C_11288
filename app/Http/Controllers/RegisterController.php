@@ -24,8 +24,10 @@ class RegisterController extends Controller
             'email' => $request->email,
             'username' => $request->username,
             'password' => Hash::make($request->password),
-            'verify_key'=> $str,
+            'verify_key' => $str,
+            'active' => 0, // atau 1 sesuai kebutuhan
         ]);
+
 
         $details = [
             'username' => $request->username,
@@ -36,7 +38,7 @@ class RegisterController extends Controller
 
         Mail::to($request->email)->send(new MailSend($details));
 
-        Session::flash('message','Link verifikasi telah dikirim ke email anda. Silahkan cek email anda untuk mengaktifkan akun.');
+        Session::flash('message', 'Link verifikasi telah dikirim ke email anda. Silahkan cek email anda untuk mengaktifkan akun.');
         return redirect('register');
     }
 
